@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="style.css" rel="stylesheet">
+  <title>Produtos</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      background: var(--background, #FEF2F8);
+    }
+
+    .content_1 {
+      margin-left: 313px;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      /* align-items: center;
+      justify-content: space-between; */
+      height: 687px;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 0 21px 21px 0;
+      background: var(--blue, #007AFF);
+      margin-right: 370px;
+      position: fixed;
+      gap: 15px;
+    }
+
+    .menu a {
+      text-align: center;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #FFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 600;
+      width: 215px;
+      padding-right: 100px;
+
+    }
+
+    .menu a:hover {
+      width: 213px;
+      border-radius: 10px;
+      background-color: #419CFF;
+    }
+
+    .link {
+      margin-top: 130px;
+      margin-bottom: 130px;
+      height: 50px;
+    }
+
+    .logo {
+      margin-right: 23px;
+      margin-top: 40px;
+    }
+
+    .link-item {
+      padding-top: 10px;
+      padding-right: 25px;
+      height: 35px;
+      transform: translateY(2px);
+      gap: 20px;
+    }
+
+    #link-item {
+      gap: 10px;
+      padding-right: 10px;
+      margin-left: 70px;
+      transform: translateY(6px);
+    }
+
+    .sair-text {
+      font-size: 23px;
+    }
+
+    .sair-text {
+      margin-top: 10px;
+      /* Ajuste este valor conforme necessário */
+    }
+
+
+    .content {
+
+      flex-grow: 1;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    #imagem {
+      width: 330px;
+    }
+
+    .content2 {
+      margin-left: 30px;
+    }
+
+    .produto {
+      background-color: #FFF;
+      border-radius: 20px;
+      padding: 10px;
+      margin: 10px;
+      width: 253px;
+    }
+
+
+    .imagpro {
+      margin-left: 105px;
+      align-items: center;
+      width: 110px;
+      height: 90px;
+
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      border: 1px solid #888;
+      width: 80%;
+      border-radius: 10px;
+    }
+
+    .header-modal {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      >h2 {
+        margin-left: 30px;
+        font-family: 'Inter', sans-serif;
+      }
+
+    }
+
+    .close-content {
+      background-color: #3C3C43;
+      opacity: 50%;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 30px;
+    }
+
+    .close {
+      color: #3C3C43;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      opacity: 50%;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+    .line-top {
+      width: 100%;
+      height: 1px;
+      background: #111111;
+      margin-bottom: 30px;
+    }
+
+    .imagprod {
+      max-width: 250px;
+      height: auto;
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .input-modal-body {
+      width: 222px;
+      height: 24px;
+
+    }
+
+    .btn-modal-bottom {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+
+    .check-stock {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    #btnNovoProduto {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #007AFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #btnNovoProduto:hover {
+      background-color: #0052A1;
+    }
+
+    /* Estilos para a modal de novo produto */
+    #modalNovoProduto {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+
+    #modalNovoProduto .modal-content,
+    .modal-body1 {
+      background-color: #FEF2F8;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 50%;
+      /* Largura da modal */
+    }
+
+    #modalNovoProduto .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    #modalNovoProduto .close:hover,
+    #modalNovoProduto .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    #modalNovoProduto input[type="text"],
+    #modalNovoProduto input[type="number"] {
+      width: 422px;
+      height: 20px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    #modalNovoProduto button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-modal-save {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #007AFF;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .btn-modal-cancel {
+      padding: 10px 20px;
+      font-size: 18px;
+      color: #007AFF;
+      background-color: #FEF2F8;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .header-section {
+      padding-top: 22px;
+      display: flex;
+      align-items: center;
+
+    }
+
+    .header-section h1 {
+      margin: 0;
+      /* Isso permite que o h1 ocupe o espaço disponível e empurre outros itens para a direita */
+      font-family: 'Inter', sans-serif;
+      font-size: 40px;
+      line-height: 160px;
+      margin-left: 9px;
+    }
+    
+    #imagemNovo {
+     
+      margin-left: 314px;
+      /* border-radius: 15px; */
+      border-radius: 21px;
+      background: var(--blue, #007AFF);
+    }
+
+    #enviar {
+      margin-left: 340px;
+      font-family: 'Inter', sans-serif;
+      margin-top: -7px;
+      color: #007AFF;
+    }
+
+    .linha {
+      margin: 0 10px;
+      width: 720px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      /* Para garantir que o botão não tenha fundo */
+      padding: 10px;
+      background-color: #CFE6FF;
+      color: #007AFF;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 25px;
+      font-style: normal;
+
+    }
+
+    .editaproduto {
+      width: 21px;
+      height: 30px;
+      margin-top: -10px;
+    }
+
+    .botaoedita {
+      width: 35px;
+      height: 35px;
+      background-color: #007AFF;
+      border-radius: 28px;
+      margin-left: 210px;
+      padding-left: 7px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="menu">
+
+    <div class="logo">
+      <img id="logo_1" src="../imag/Frame 4 (1).png">
+      <img id="logo_2" src="../imag/Group 74.svg">
+    </div>
+    <a href="../reservas/reservas.html"><img class="link-item" src="../imag/material-symbols_calendar-clock.svg">
+      Reservas</a>
+    <a href="../produtos/produtos.html"><img class="link-item" src="../imag/mingcute_box-line.svg"> Produtos</a>
+
+    <a href="../sevicos/servicos.html"><img class="link-item" src="../imag/bi_grid-fill.svg"> Serviços</a>
+
+    <a href="../pessoas/pessoas.html"><img class="link-item" src="../imag/ph_users-bold.svg"> Usuário</a>
+
+    <a href="../Login/index.html" class="link">
+      <img id="link-item" src="../imag/bi_box-arrow-right.svg">
+      <span class="sair-text">Sair</span>
+    </a>
+
+  </div>
+
+  <section class="content_1">
+    <div class="content2">
+      <div class="header-section">
+        <h1>Produtos</h1>
+        <img class="linha" src="../imag/Line 1.svg">
+        <button onclick="abrirModalNovoProduto()"><img class="add">+ Adicionar produto</button>
+      </div>
+
+      <div>
+        <div class="content" id="content"></div>
+      </div>
+
+      <div id="modalNovoProduto" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="fecharModalNovoProduto()">&times;</span>
+          <div id="modalContentNovoProduto"></div>
+        </div>
+      </div>
+
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="fecharModalProduto()">&times;</span>
+          <div id="modalContent"></div>
+        </div>
+      </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="scriptmodal"></script>
+
+  <script>
+    function criarComponenteProduto(produto) {
+      var componente = document.createElement("div");
+      componente.classList.add("produto");
+      componente.innerHTML = `
+                <img class="imagpro" src="${produto.imagem}" alt="${produto.nome}">
+                <h3>${produto.nome}</h3>
+                <p>Preço: R$ ${produto.preco}</p>
+                <p>Estoque: ${produto.estoque}</p>
+                <button class ="botaoedita">
+                  <img class="editaproduto" src="../imag/bi_pencil-square.svg" alt="Edita produto">
+                </button>
+            `;
+      var botaoDetalhes = componente.querySelector("button");
+      botaoDetalhes.addEventListener("click", function () {
+        abrirModalProduto(produto);
+      });
+      return componente;
+    }
+    // Função para abrir modal de criação de novo produto
+    function abrirModalNovoProduto() {
+      var modal = document.getElementById("modalNovoProduto");
+      var modalContentNovoProduto = document.getElementById(
+        "modalContentNovoProduto"
+      );
+
+      fecharModalProduto();
+      modal.style.display = "block";
+
+      modalContentNovoProduto.innerHTML = `
+      <div class="header-modal">
+            <div class="close-content">
+              <span class="close" onclick="fecharModalProduto()">&times;</span>
+            </div>
+            <h2 class="new-product">Adicionar Produto</h2>
+          </div>
+
+          <div class="line-top"></div>
+          
+          <input type="file" id="imagemNovo" accept="image/*"><br>
+          <br>
+          <p id="enviar"> Enviar foto</p>
+        <div class="modal-body">
+          <input class="input-modal-body" type="text" placeholder="Nome" id="nomeNovo" required>
+          <input class="input-modal-body" type="text" placeholder="Descrição" id="descricaoNovo" required>
+          <input class="input-modal-body" type="text" placeholder="Preço do Produto" id="precoNovo" required>
+          <input class="input-modal-body" type="text" placeholder="Desconto" id="descontoNovo">
+          <input class="input-modal-body" type="number" placeholder="Quantidade em Estoque" id="estoqueNovo" required>
+        <div class="check-stock">
+          <label for="disponivelNovo">Disponível:</label>
+          <input type="checkbox" placeholder="Em Estoque" id="disponivelNovo">
+        </div>
+        <div class="btn-modal-bottom">
+          <button class="btn-modal-cancel" onclick="fecharModalNovoProduto()">Cancelar</button>
+          <button class="btn-modal-save" onclick="criarNovoProduto()">Salvar</button>
+        </div>
+        </div>
+        `;
+
+      var span = document.getElementsByClassName("close")[0];
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+    }
+
+    // Função para fechar modal de criação de novo produto
+    function fecharModalNovoProduto() {
+      var modal = document.getElementById("modalNovoProduto");
+      modal.style.display = "none";
+    }
+
+    // Função para criar novo produto
+    function criarNovoProduto() {
+      var nome = document.getElementById("nomeNovo").value;
+      var descricao = document.getElementById("descricaoNovo").value;
+      var preco = document.getElementById("precoNovo").value;
+      var desconto = document.getElementById("descontoNovo").value;
+      var estoque = document.getElementById("estoqueNovo").value;
+      var disponivel = document.getElementById("disponivelNovo").checked;
+      var imagemInput = document.getElementById("imagemNovo");
+      var imagem = imagemInput.files[0];
+
+      if (desconto === "") {
+        desconto = 0.0;
+      }
+
+      var formData = new FormData();
+      formData.append("nome", nome);
+      formData.append("descricao", descricao);
+      formData.append("preco", preco);
+      formData.append("desconto", desconto);
+      formData.append("estoque", estoque);
+      formData.append("disponivel", disponivel);
+      if (imagem) {
+        formData.append("imagem", imagem);
+      }
+
+      fetch("http://127.0.0.1:8000/api/produtos/", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Produto criado com sucesso:", data);
+          location.reload();
+        })
+        .catch((error) => console.error("Erro:", error));
+
+      fecharModalNovoProduto();
+    }
+
+    // Modal Editar pordutos
+    function abrirModalProduto(produto) {
+      var modal = document.getElementById("myModal");
+      var modalContent = document.getElementById("modalContent");
+
+      fecharModalNovoProduto();
+
+      modal.style.display = "block";
+
+      var dataCriacao = new Date(produto.data_criacao);
+      var dataFormatada = `${dataCriacao.getDate()}/${dataCriacao.getMonth() + 1
+        }/${dataCriacao.getFullYear()}`;
+
+      modalContent.innerHTML = `
+      <section class= " ed">
+    <div class="header-modal">
+      <h2 class="new-product">Editar Produto</h2>
+    </div>
+
+    <div class="line-top"></div>
+
+    <div class="modal-body1">
+      <label for="nome">Nome:</label>
+      <input class="input-modal-body" type="text" id="nome" value="${produto.nome}" required><br>
+
+      <label for="descricao">Descrição:</label>
+      <input class="input-modal-body" type="text" id="descricao" value="${produto.descricao}" required><br>
+
+      <label for="preco">Preço:</label>
+      <input class="input-modal-body" type="text" id="preco" value="${produto.preco}" required><br>
+
+      <label for="desconto">Desconto:</label>
+      <input class="input-modal-body" type="text" id="desconto" value="${produto.desconto || 0 }"><br>
+
+      <label for="estoque">Estoque:</label>
+      <input class="input-modal-body" type="number" id="estoque" value="${produto.estoque}" required><br>
+
+      <div class="check-stock">
+        <label for="disponivel">Disponível:</label>
+        <input type="checkbox" id="disponivel" ${produto.disponivel ? "checked" : "" }><br>
+      </div>
+
+      <label for="imagem">Imagem:</label>
+      <input type="file" id="imagem" accept="image/*" class="input-modal-body"><br>
+
+      <img id="imag" src="${produto.imagem}" alt="${produto.nome}" style="max-width: 200px"><br>
+
+      <div class="btn-modal-bottom">
+        <button class="btn-modal-cancel" onclick="confirmarEdicao(${produto.id})">Confirmar Edição</button>
+        <button class="btn-modal-save">Salvar</button>
+      </div>
+    </div>
+  </section>
+    `;
+
+      var span = document.getElementsByClassName("close")[0];
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+    }
+
+    function fecharModalProduto() {
+      var modal = document.getElementById("myModal");
+      modal.style.display = "none";
+    }
+
+    function confirmarEdicao(produtoId) {
+      var nome = document.getElementById("nome").value;
+      var descricao = document.getElementById("descricao").value;
+      var preco = document.getElementById("preco").value;
+      var desconto = document.getElementById("desconto").value;
+      var estoque = document.getElementById("estoque").value;
+      var disponivel = document.getElementById("disponivel").checked;
+      var imagemInput = document.getElementById("imagem");
+      var imagem = imagemInput.files[0];
+      if (desconto === "") {
+        desconto = 0.0;
+      }
+
+      if (imagem) {
+        // Se um novo arquivo foi selecionado, criar um FormData para incluir a imagem
+        var formData = new FormData();
+        formData.append("imagem", imagem);
+        formData.append("nome", nome);
+        formData.append("descricao", descricao);
+        formData.append("preco", preco);
+        formData.append("desconto", desconto);
+        formData.append("estoque", estoque);
+        formData.append("disponivel", disponivel);
+
+        fetch(`http://127.0.0.1:8000/api/produtos/${produtoId}/`, {
+          method: "PATCH",
+          body: formData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                "Produto não foi modificado. Status: " + response.status
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            location.reload();
+          })
+          .catch((error) => {
+            if (error.message.includes("400")) {
+              alert("Produto não foi modificado. Verifique os dados.");
+            } else {
+              console.error("Erro:", error);
+            }
+          });
+      } else {
+        // Se nenhum novo arquivo foi selecionado, enviar os outros dados via JSON
+        var data = {
+          nome: nome,
+          descricao: descricao,
+          preco: preco,
+          desconto: desconto,
+          estoque: parseInt(estoque),
+          disponivel: disponivel,
+        };
+
+        fetch(`http://127.0.0.1:8000/api/produtos/${produtoId}/`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                "Produto não foi modificado. Status: " + response.status
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            location.reload();
+          })
+          .catch((error) => {
+            if (error.message.includes("400")) {
+              alert("Produto não foi modificado. Verifique os dados.");
+            } else {
+              console.error("Erro:", error);
+            }
+          });
+      }
+
+      var modal = document.getElementById("myModal");
+      modal.style.display = "none";
+    }
+
+    $(document).ready(function () {
+      var produtosContainer = document.getElementById("content");
+
+      fetch("http://127.0.0.1:8000/api/produtos/")
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach(function (produto) {
+            var componente = criarComponenteProduto(produto);
+            produtosContainer.appendChild(componente);
+          });
+        })
+        .catch((error) => console.error("Erro:", error));
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="style.css" rel="stylesheet">
+  <title>Reservas</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      background: var(--background, #FEF2F8);
+      /* position: fixed; */
+    }
+
+    .content_1 {
+      margin-left: 313px;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+
+      /* justify-content: space-between; */
+      height: 687px;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 0 21px 21px 0;
+      background: var(--blue, #007AFF);
+      margin-right: 370px;
+      position: fixed;
+      gap: 15px;
+
+    }
+
+    .menu a {
+      text-align: center;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #FFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 600;
+      width: 215px;
+      padding-right: 100px;
+    }
+
+    .menu a:hover {
+      width: 213px;
+      border-radius: 10px;
+      background-color: #419CFF;
+    }
+    
+    .link {
+      margin-top: 130px;
+      margin-bottom: 130px;
+      height: 50px;
+    }
+    .logo {
+      margin-right: 23px;
+      margin-top: 40px;
+
+    }
+
+    .link-item {
+      padding-top: 10px;
+      padding-right: 25px;
+      height: 35px;
+      transform: translateY(2px);
+      gap: 20px;
+    }
+
+    #link-item {
+      gap: 10px;
+      padding-right: 10px;
+      margin-left: 70px;
+      transform: translateY(6px);
+
+    }
+
+    #link-item {
+      font-size: 2px;
+    }
+
+    .sair-text {
+      font-size: 23px;
+    }
+
+    .content {
+      flex-grow: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 23px;
+    }
+   
+    #modalContent {
+      width: 100%;
+    }
+    #modalContent li p{
+     
+      display: flex;
+    }
+    .content2 {
+      margin-left: 38px;
+    }
+
+    .reserva {
+      padding: 10px;
+      /* margin-bottom: 30px; */
+      cursor: pointer;
+      border-radius: 21px;
+      background-color: #FFF;
+      width: 347px;
+      flex-shrink: 0;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color:#FEF2F8;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      border-radius: 15px;
+      width: 400px;
+      font-family: 'Inter', sans-serif;
+     
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .animal-img {
+      max-width: 200px;
+      height: auto;
+    }
+
+    .header-section {
+      padding-top: 15px;
+      display: flex;
+      align-items: center;
+
+    }
+
+    .linha {
+      width: 972px;
+    }
+
+    h1 {
+      color: var(--labels-primary, #000);
+      font-family: 'Inter', sans-serif;
+      font-size: 40px;
+      line-height: 110px;
+      display: flex;
+      margin-left: -1px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="menu">
+
+    <div class="logo">
+      <img id="logo_1" src="../imag/Frame 4 (1).png">
+      <img id="logo_2" src="../imag/Group 74.svg">
+    </div>
+
+    <a href="../reservas/reservas.html"><img class="link-item" src="../imag/material-symbols_calendar-clock.svg">
+      Reservas</a>
+    <a href="../produtos/produtos.html"><img class="link-item" src="../imag/mingcute_box-line.svg"> Produtos</a>
+
+    <a href="../sevicos/servicos.html"><img class="link-item" src="../imag/bi_grid-fill.svg"> Serviços</a>
+
+    <a href="../pessoas/pessoas.html"><img class="link-item" src="../imag/ph_users-bold.svg"> Usuário</a>
+
+    <a href="../Login/index.html" class="link" >
+      <img id="link-item" src="../imag/bi_box-arrow-right.svg">
+      <span class="sair-text">Sair</span>
+    </a>
+
+  </div>
+
+  <section class="content_1">
+    <div class="content2">
+      <div class="header-section">
+        <h1>Reservas</h1>
+        <img class="linha" src="../imag/Line 1.svg">
+      </div>
+      <div class="content" id="reservasContainer"></div>
+    </div>
+<section>
+  
+</section>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function criarComponenteReserva(reserva) {
+      var componente = document.createElement("div");
+      componente.classList.add("reserva");
+      var inicioFormatado = formatarDataHora(reserva.inicio);
+      var tempoTotalFormatado = reserva.tempo_total;
+      var valorTotalFormatado = reserva.valor_total;
+      componente.innerHTML = `
+        <p>Início: ${inicioFormatado}</p>
+        <p>Tempo Total: ${tempoTotalFormatado}</p>
+        <p>Valor Total: ${valorTotalFormatado}</p>
+    `;
+      componente.onclick = function () {
+        abrirModal(reserva);
+      };
+      return componente;
+    }
+
+    function abrirModal(reserva) {
+      var modal = document.getElementById("myModal");
+      var modalContent = document.getElementById("modalContent");
+
+      modal.style.display = "block";
+
+      // Formatando data e hora
+      var inicioFormatado = formatarDataHora(reserva.inicio);
+      var fimFormatado = formatarDataHora(reserva.fim);
+
+      // Requisição para obter informações do usuário
+      fetch(
+        `http://127.0.0.1:8000/api/usuarios/${reserva.usuario}/obter_celular_username/`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          // Mapear a lista de serviços para requisições individuais
+          var servicoPromises = reserva.lista_servicos.map((id) => {
+            return fetch(`http://127.0.0.1:8000/api/servicos/${id}/`).then(
+              (response) => response.json()
+            );
+          });
+
+          // Requisição para obter informações do animal
+          fetch(`http://127.0.0.1:8000/api/animais/${reserva.animal}/`)
+            .then((response) => response.json())
+            .then((animal) => {
+              // Executar todas as requisições em paralelo
+              Promise.all(servicoPromises)
+                .then((servicos) => {
+                  var usuarioInfo = `
+                  
+                                <p class="modal-reserva" >Usuário:</p>
+                                <ul>
+                                    <li>Email: ${data.username}</li>
+                                    <li>Celular: ${data.celular}</li>
+                                </ul>
+                            `;
+
+                  var servicosInfo = servicos
+                    .map(
+                      (servico) => `
+                                        <ul>
+                                            <li>Nome: ${servico.nome}</li>
+                                            <li>Tipo de Serviço: ${servico.tipo_servico}</li>
+                                        </ul>
+                                    `
+                    )
+                    .join("");
+
+                  var animalInfo = `
+                                <p>Animal:</p>
+                                <img class="animal-img" src="${animal.foto}" alt="Foto do Animal">
+                                <ul>
+                                    <li>Nome: ${animal.nome}</li>
+                                    <li>Espécie: ${animal.especie}</li>
+                                    <li>Raça: ${animal.raca}</li>
+                                    <li>Peso: ${animal.peso}</li>
+                                    <li>Idade: ${animal.idade} anos</li>
+                                    <li>Sexo: ${animal.sexo}</li>
+                                </ul>
+                            `;
+
+                  modalContent.innerHTML = `
+                                <p>Início: ${inicioFormatado}</p>
+                                <p>Fim: ${fimFormatado}</p>
+                                <p>Tempo Total: ${reserva.tempo_total}</p>
+                                <p>Valor Total: ${reserva.valor_total}</p>
+                                ${usuarioInfo}
+                                <p>Serviço:</p>
+                                ${servicosInfo}
+                                ${animalInfo}
+                            `;
+                })
+                .catch((error) => console.error("Erro:", error));
+            })
+            .catch((error) => console.error("Erro:", error));
+        })
+        .catch((error) => console.error("Erro:", error));
+
+      var span = document.getElementsByClassName("close")[0];
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+    }
+
+    function formatarDataHora(dataHora) {
+      var data = new Date(dataHora);
+      var horas = data.getHours().toString().padStart(2, "0");
+      var minutos = data.getMinutes().toString().padStart(2, "0");
+      var dia = data.getDate().toString().padStart(2, "0");
+      var mes = (data.getMonth() + 1).toString().padStart(2, "0"); // Lembrando que os meses em JavaScript começam de 0
+      var ano = data.getFullYear().toString().slice(-2); // Pegando os últimos dois dígitos do ano
+
+      return `${horas}:${minutos} - ${dia}-${mes}-${ano}`;
+    }
+
+    $(document).ready(function () {
+      var reservasContainer = document.getElementById("reservasContainer");
+
+      fetch("http://127.0.0.1:8000/api/reservas/")
+        .then((response) => response.json())
+        .then((data) => {
+          // Processar os dados e criar os componentes de reserva
+          data.forEach(function (reserva) {
+            var componente = criarComponenteReserva(reserva);
+            reservasContainer.appendChild(componente);
+          });
+        })
+        .catch((error) => console.error("Erro:", error));
+    });
+  </script>
+</body>
+
+</html>

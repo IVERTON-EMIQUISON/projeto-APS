@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serviços</title>
+  <style>
+     body {
+      margin: 0;
+      display: flex;
+      background: var(--background, #FEF2F8);
+    }
+
+    .content_1 {
+      margin-left: 313px;
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      /* align-items: center;
+      justify-content: space-between; */
+      height: 687px;
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 0 21px 21px 0;
+      background: var(--blue, #007AFF);
+      margin-right: 370px;
+      position: fixed;
+      gap: 15px;
+    }
+
+    .menu a {
+      text-align: center;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #FFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 600;
+      width: 215px;
+      padding-right: 100px;
+
+    }
+
+    .menu a:hover {
+      width: 213px;
+      border-radius: 10px;
+      background-color: #419CFF;
+    }
+
+    .logo {
+      margin-right: 23px;
+      margin-top: 40px;
+    }
+
+    .link-item {
+      padding-top: 10px;
+      padding-right: 25px;
+      height: 35px;
+      transform: translateY(2px);
+      gap: 20px;
+    }
+
+    #link-item {
+      gap: 10px;
+      padding-right: 10px;
+      margin-left: 70px;
+      transform: translateY(6px);
+    }
+
+    .link {
+      margin-top: 130px;
+      margin-bottom: 130px;
+      height: 50px;
+    }
+    .sair-text {
+      font-size: 23px;
+    }
+
+    .sair-text {
+      margin-top: 10px;
+      /* Ajuste este valor conforme necessário */
+    }
+
+
+    .content {
+      flex-grow: 1;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .content2 {
+      margin-left: 30px;
+    }
+    .servico{
+      background: var(--background, #FEF2F8);
+      background-color: #FFF;
+      border-radius: 20px;
+      padding: 10px;
+      margin: 10px;
+      width: 253px;
+    }
+
+    .produto img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .produto-img {
+      max-width: 250px;
+      height: auto;
+    }
+
+    #btnNovoServico {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #007AFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #btnNovoServico:hover {
+      background-color: #0052A1;
+    }
+
+    /* Estilos para a modal de novo produto */
+    #modalNovoServico {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: #FEF2F8;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 50%;
+      border-radius: 15px;
+      font-family: 'Inter', sans-serif;
+      /* Largura da modal */
+    }
+    
+    #modalNovoServico .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    #modalNovoServico.close:hover,
+    #modalNovoServico .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content input[type="number"] {
+    width: 420px;
+    height: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 10px;
+    }
+
+    .modal-content button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #007AFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+
+    .header-section {
+      padding-top: 22px;
+      display: flex;
+      align-items: center;
+
+    }
+
+    .header-section h1 {
+      margin: 0;
+      /* Isso permite que o h1 ocupe o espaço disponível e empurre outros itens para a direita */
+      font-family: 'Inter', sans-serif;
+      font-size: 40px;
+      line-height: 160px;
+      margin-left: 9px;
+    }
+
+    .linha {
+      margin: 0 10px;
+      width: 734px;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      /* Para garantir que o botão não tenha fundo */
+      padding: 10px;
+      background-color: #CFE6FF;
+      color: #007AFF;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 25px;
+      font-style: normal;
+
+    }
+    .editaproduto{
+      width: 21px;
+      height: 30px;
+      margin-top: -10px;
+    }
+
+    .botaoedita{
+      width: 35px;
+      height: 35px;
+      background-color: #007AFF;
+      border-radius: 28px;
+      margin-left: 210px;
+      padding-left: 7px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="menu">
+
+    <div class="logo">
+      <img id="logo_1" src="../imag/Frame 4 (1).png">
+      <img id="logo_2" src="../imag/Group 74.svg">
+    </div>
+    <a href="../reservas/reservas.html"><img class="link-item" src="../imag/material-symbols_calendar-clock.svg">
+      Reservas</a>
+    <a href="../produtos/produtos.html"><img class="link-item" src="../imag/mingcute_box-line.svg"> Produtos</a>
+
+    <a href="../sevicos/servicos.html"><img class="link-item" src="../imag/bi_grid-fill.svg"> Serviços</a>
+
+    <a href="../pessoas/pessoas.html"><img class="link-item" src="../imag/ph_users-bold.svg"> Usuário</a>
+
+    <a href="../Login/index.html" class="link" >
+      <img id="link-item" src="../imag/bi_box-arrow-right.svg">
+      <span class="sair-text">Sair</span>
+    </a>
+
+  </div>
+  <section class="content_1">
+    <div class="content2">
+      <div class="header-section">
+        <h1>Serviços</h1>
+        <img class="linha" src="../imag/Line 1.svg">
+        <button onclick="abrirModalNovoServico()"> <img class="add">+  Adicionar serviço</button>
+      </div>
+
+      <div>
+        <div class="content" id="content"></div>
+      </div>
+
+      <div id="modalNovoServico" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="fecharModalNovoServico()">&times;</span>
+          <div id="modalContentNovoServico"></div>
+        </div>
+      </div>
+
+      <div id="myModalServico" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="fecharModalServico()">&times;</span>
+          <div id="modalContentServico"></div>
+        </div>
+      </div>
+  </section>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    function criarComponenteServico(servico) {
+      var componente = document.createElement("div");
+      componente.classList.add("servico");
+      componente.innerHTML = `
+                <h3>${servico.nome}</h3>
+                <p>Tipo de Serviço: ${servico.tipo_servico}</p>
+                <p>Valor: R$ ${servico.valor}</p>
+                <p>Tempo Estimado: ${servico.tempo_estimado}</p>
+                <button class ="botaoedita">
+                  <img class="editaproduto" src="../imag/bi_pencil-square.svg" alt="Edita produto">
+                </button>
+            `;
+      var botaoDetalhes = componente.querySelector("button");
+      botaoDetalhes.addEventListener("click", function () {
+        abrirModalServico(servico);
+      });
+      return componente;
+    }
+
+    function abrirModalNovoServico() {
+      var modal = document.getElementById("modalNovoServico");
+      var modalContentNovoServico = document.getElementById(
+        "modalContentNovoServico"
+      );
+
+      fecharModalServico();
+      modal.style.display = "block";
+
+      modalContentNovoServico.innerHTML = `
+        <h2>Novo Serviço</h2>
+        <label  for="nomeNovo"></label>
+        <input placeholder="Nome do serviço" type="text" id="nomeNovo" required><br>
+
+        <label for="tipoServicoNovo"></label>
+        <select class="input-modal-body" id="tipoServicoNovo" required>
+            <option value="banho">Banho</option>
+            <option value="tosa">Tosa</option>
+            <option value="consulta">Consulta</option>
+            <option value="outros">Outros</option>
+        </select><br>
+
+        <label for="valorNovo"></label>
+        <input placeholder="Preço do serviço" type="text" id="valorNovo" required><br>
+
+        <label for="tempoEstimadoNovo"></label>
+        <input placeholder="Tempo estimado" type="text" id="tempoEstimadoNovo" required><br>
+
+        <label for="descontosNovo"></label>
+        <input placeholder="Desconto" type="text" id="descontosNovo"><br>
+        <div class="btn-modal-bottom">
+        <button onclick="criarNovoServico()">Criar Serviço</button>
+      </div>
+    `;
+
+      var span = document.getElementsByClassName("close")[0];
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+    }
+
+    function fecharModalNovoServico() {
+      var modal = document.getElementById("modalNovoServico");
+      modal.style.display = "none";
+    }
+
+    function criarNovoServico() {
+      var nome = document.getElementById("nomeNovo").value;
+      var tipo_servico = document.getElementById("tipoServicoNovo").value;
+      var valor = document.getElementById("valorNovo").value;
+      var tempo_estimado = document.getElementById("tempoEstimadoNovo").value;
+      var descontos = document.getElementById("descontosNovo").value;
+
+      if (descontos === "") {
+        descontos = 0.0;
+      }
+
+      var data = {
+        nome: nome,
+        tipo_servico: tipo_servico,
+        valor: valor,
+        tempo_estimado: tempo_estimado,
+        descontos: descontos,
+      };
+
+      fetch("http://127.0.0.1:8000/api/servicos/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Serviço criado com sucesso:", data);
+          location.reload();
+        })
+        .catch((error) => console.error("Erro:", error));
+
+      fecharModalNovoServico();
+    }
+
+    function abrirModalServico(servico) {
+      var modal = document.getElementById("myModalServico");
+      var modalContent = document.getElementById("modalContentServico");
+
+      fecharModalNovoServico();
+
+      modal.style.display = "block";
+
+      modalContent.innerHTML = `
+        <h2>Editar Serviço</h2>
+        
+        <input type="text" placeholder="Nome" id="nome" value="${servico.nome}" required><br>
+
+        <select id="tipoServico" required>
+            <option value="banho" ${servico.tipo_servico === "banho" ? "selected" : ""
+        }>Banho</option>
+            <option value="tosa" ${servico.tipo_servico === "tosa" ? "selected" : ""
+        }>Tosa</option>
+            <option value="consulta" ${servico.tipo_servico === "consulta" ? "selected" : ""
+        }>Consulta</option>
+            <option value="outros" ${servico.tipo_servico === "outros" ? "selected" : ""
+        }>Outros</option>
+        </select><br>
+
+        <input type="text" id="valor" placeholder="Valor" value="${servico.valor}" required><br>
+
+      
+        <input type="text" placeholder="Tempo estimado" id="tempoEstimado" value="${servico.tempo_estimado
+        }" required><br>
+
+        <input type="text" placeholder="Desconto" id="descontos" value="${servico.descontos || ""
+        }"><br>
+
+        <button onclick="confirmarEdicaoServico(${servico.id
+        })">Confirmar Edição</button>
+    `;
+
+      var span = document.getElementsByClassName("close")[0];
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+    }
+
+    function fecharModalServico() {
+      var modal = document.getElementById("myModalServico");
+      modal.style.display = "none";
+    }
+
+    function confirmarEdicaoServico(servicoId) {
+      var nome = document.getElementById("nome").value;
+      var tipo_servico = document.getElementById("tipoServico").value;
+      var valor = document.getElementById("valor").value;
+      var tempo_estimado = document.getElementById("tempoEstimado").value;
+      var descontos = document.getElementById("descontos").value;
+
+      if (descontos === "") {
+        descontos = 0.0;
+      }
+
+      var data = {
+        nome: nome,
+        tipo_servico: tipo_servico,
+        valor: valor,
+        tempo_estimado: tempo_estimado,
+        descontos: descontos,
+      };
+
+      fetch(`http://127.0.0.1:8000/api/servicos/${servicoId}/`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(
+              "Serviço não foi modificado. Status: " + response.status
+            );
+          }
+          return response.json();
+        })
+        .then((data) => {
+          location.reload();
+        })
+        .catch((error) => {
+          if (error.message.includes("400")) {
+            alert("Serviço não foi modificado. Verifique os dados.");
+          } else {
+            console.error("Erro:", error);
+          }
+        });
+
+      var modal = document.getElementById("myModalServico");
+      modal.style.display = "none";
+    }
+
+    $(document).ready(function () {
+      var servicosContainer = document.getElementById("content");
+
+      fetch("http://127.0.0.1:8000/api/servicos/")
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach(function (servico) {
+            var componente = criarComponenteServico(servico);
+            servicosContainer.appendChild(componente);
+          });
+        })
+        .catch((error) => console.error("Erro:", error));
+    });
+  </script>
+</body>
+
+</html>
