@@ -1,0 +1,144 @@
+
+.containe {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: #FEF2F8;
+}
+
+.logo {
+    width: 770px;
+    margin-top: 120px;
+    text-align: center;
+    flex-shrink: 0;
+
+}
+
+.logo_1 {
+    display: flex;
+    margin-left: 200px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo_2 {
+    color: #007AFF;
+    font-family: Slang;
+    font-size: 164.634px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.admin {
+    display: flex;
+    justify-content: center;
+}
+
+h2,
+h3 {
+    color: #FF459D;
+    font-family: SF Pro Text;
+    font-size: 44.122px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+
+h3 {
+    padding-top: 10px;
+    font-size: 28px;
+}
+
+/* lodin Admin*/
+#loginForm {
+    width: 765px;
+    flex-shrink: 0;
+    border-radius: 21px 0px 0px 21px;
+    background: var(--blue, #007AFF);
+    box-shadow: -10px 0px 70px 0px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(25px);
+
+}
+
+.login_AD {
+    margin-top: 190px;
+    text-align: center;
+
+}
+
+.login_login,
+.login_admin {
+    padding-top: 20px;
+    display: contents;
+    color: #FFF;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 22px;
+    /* 68.75% */
+}
+
+.login_admin {
+    font-weight: 400;
+    border: #FF459D;
+    font-size: 26px;
+}
+
+.login {
+    text-align: center;
+    margin: 132px;
+
+}
+
+#email,
+#password {
+    width: 360px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border-left: 10px solid var(--pink, #FF459D);
+    background: #FFF;
+    font-size: 16px;
+    padding-left: 10px;
+    border-top: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+
+}
+
+.visualizar{
+    margin-top: -70px;
+}
+
+.h4 {
+    color: #FFF;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif;
+    text-decoration-line: underline;
+    position: absolute;
+    padding-left: 309px;
+    margin-top: -13px;
+
+}
+
+.submit {
+    width: 378px;
+    height: 46px;
+    flex-shrink: 0;
+    color: var(--blue, #007AFF);
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    border-radius: 10px;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    border: none;
+   
+    margin-top: 92px;
+}
